@@ -1,7 +1,15 @@
 const config = {
   plugins: {
-    "@tailwindcss/postcss": {},
+    '@tailwindcss/postcss': {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['var(--font-iransans)', 'sans-serif'],
+          },
+        },
+      },
+    },
   },
-};
+}
 
-export default config;
+export default config
