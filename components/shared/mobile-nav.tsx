@@ -28,7 +28,7 @@ export function MobileNav() {
       <SheetContent side="right" className="w-64 p-0">
         <SheetHeader className="h-16 justify-center border-b border-border px-6">
           <SheetTitle className="text-right text-base font-bold self-center">
-            مدیریت مالی مدرسه
+            فهرست
           </SheetTitle>
         </SheetHeader>
         <NavLinks onNavigate={() => setOpen(false)} />

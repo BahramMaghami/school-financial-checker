@@ -8,18 +8,18 @@ datasource db {
 }
 
 enum TransactionType {
-  INCOME
-  EXPENSE
+  هزینه
+  درامد
 }
 
 enum Category {
-  SALARY
-  MAINTENANCE
-  EQUIPMENT
-  TUITION
-  UTILITIES
-  SUPPLIES
-  OTHER
+  حقوق
+  تعمیرات
+  تجهیزات
+  شهریه
+  مصرفی
+  ملزومات
+  سایر
 }
 
 model User {
