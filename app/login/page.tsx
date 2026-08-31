@@ -54,8 +54,8 @@ export default function LoginPage() {
           </CardTitle>
           <CardDescription>مدیریت هزینه و درآمد مدرسه</CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <CardContent>
             <div className="space-y-1.5">
               <Label htmlFor="email">ایمیل</Label>
               <Input
@@ -81,13 +81,13 @@ export default function LoginPage() {
                 {error}
               </p>
             )}
-          </form>
-        </CardContent>
-        <CardFooter>
-          <Button type="submit" className="h-11 w-full" disabled={loading}>
-            {loading ? 'در حال ورود...' : 'ورود'}
-          </Button>
-        </CardFooter>
+          </CardContent>
+          <CardFooter>
+            <Button type="submit" className="h-11 w-full" disabled={loading}>
+              {loading ? 'در حال ورود...' : 'ورود'}
+            </Button>
+          </CardFooter>
+        </form>
       </Card>
     </div>
   )
