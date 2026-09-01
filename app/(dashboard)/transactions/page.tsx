@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { auth } from '@/lib/auth'
 
 const categoryLabels: Record<string, string> = {
   حقوق: 'حقوق',
@@ -22,6 +23,8 @@ const categoryLabels: Record<string, string> = {
 }
 
 export default async function TransactionsPage() {
+  const session = await auth()
+
   const transactions = await prisma.transaction.findMany({
     orderBy: {
       date: 'desc',
@@ -34,10 +37,12 @@ export default async function TransactionsPage() {
       <div className="mb-4 flex items-center justify-between gap-4">
         <h1 className="shrink-0 text-xl font-bold">تراکنش‌ها</h1>
 
-        <Button
-          render={<Link href="/transactions/new">+ تراکنش جدید</Link>}
-          nativeButton={false}
-        />
+        {session?.user?.role === 'admin' && (
+          <Button
+            render={<Link href="/transactions/new">+ تراکنش جدید</Link>}
+            nativeButton={false}
+          />
+        )}
       </div>
 
       {/* Table */}

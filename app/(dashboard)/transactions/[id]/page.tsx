@@ -5,6 +5,7 @@ import { ArrowRight, Pencil } from 'lucide-react'
 import prisma from '@/lib/prisma'
 import { Button } from '@/components/ui/button'
 import { DeleteTransactionButton } from '@/app/(dashboard)/transactions/[id]/delete-transaction-button'
+import { auth } from '@/lib/auth'
 
 const categoryLabels: Record<string, string> = {
   SALARY: 'حقوق',
@@ -22,6 +23,7 @@ export default async function TransactionDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
+  const session = await auth()
   const transaction = await prisma.transaction.findUnique({ where: { id } })
   if (!transaction) notFound()
 
@@ -92,20 +94,22 @@ export default async function TransactionDetailPage({
           )}
         </div>
 
-        <div className="flex gap-2 border-t border-border p-6">
-          <Button
-            render={
-              <Link href={`/transactions/${transaction.id}/edit`}>
-                <Pencil className="h-4 w-4" />
-                ویرایش
-              </Link>
-            }
-            variant="outline"
-            className="gap-2"
-            nativeButton={false}
-          ></Button>
-          <DeleteTransactionButton id={transaction.id} />
-        </div>
+        {session?.user?.role === 'admin' && (
+          <div className="flex gap-2 border-t border-border p-6">
+            <Button
+              render={
+                <Link href={`/transactions/${transaction.id}/edit`}>
+                  <Pencil className="h-4 w-4" />
+                  ویرایش
+                </Link>
+              }
+              variant="outline"
+              className="gap-2"
+              nativeButton={false}
+            ></Button>
+            <DeleteTransactionButton id={transaction.id} />
+          </div>
+        )}
       </div>
     </div>
   )
