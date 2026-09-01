@@ -37,6 +37,11 @@ export async function updateTransaction(id: string, data: TransactionInput) {
   }
 
   const existing = await prisma.transaction.findUnique({ where: { id } })
+
+  console.log('TRANSACTION:', existing)
+  console.log('TRANSACTION USER ID:', existing?.userId)
+  console.log('SESSION USER ID:', session.user.id)
+
   if (!existing || existing.userId !== session.user.id) {
     throw new Error('دسترسی غیرمجاز')
   }

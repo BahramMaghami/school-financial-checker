@@ -30,64 +30,86 @@ export default async function TransactionsPage() {
     <div className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">تراکنش‌ها</h1>
+
         <Button
           render={<Link href="/transactions/new">+ تراکنش جدید</Link>}
           nativeButton={false}
-        ></Button>
+        />
       </div>
 
-      <Table className="table-fixed w-full">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[12%]">تاریخ</TableHead>
-            <TableHead className="w-[18%]">عنوان</TableHead>
-            <TableHead className="w-[16.66%]">دسته‌بندی</TableHead>
-            <TableHead className="w-[10%]">نوع</TableHead>
-            <TableHead className="w-[22%]">مبلغ</TableHead>
-            <TableHead className="w-[21.34%]">جزییات</TableHead>
-          </TableRow>
-        </TableHeader>
+      <div className="w-full min-w-0 overflow-hidden">
+        <div className="w-full min-w-0 overflow-x-auto">
+          <Table className="min-w-[800px] table-fixed">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[12%] whitespace-nowrap">
+                  تاریخ
+                </TableHead>
 
-        <TableBody>
-          {transactions.map((t) => (
-            <TableRow key={t.id}>
-              <TableCell className="w-[12%]">
-                <Link href={`/transactions/${t.id}`} className="block">
-                  {new Date(t.date).toLocaleDateString('fa-IR')}
-                </Link>
-              </TableCell>
+                <TableHead className="w-[18%] whitespace-nowrap">
+                  عنوان
+                </TableHead>
 
-              <TableCell className="w-[18%] mr-2">
-                <Link href={`/transactions/${t.id}`} className="block mr-2">
-                  {t.title}
-                </Link>
-              </TableCell>
+                <TableHead className="w-[16.66%] whitespace-nowrap">
+                  دسته‌بندی
+                </TableHead>
 
-              <TableCell className="w-[16.66%]">
-                {categoryLabels[t.category]}
-              </TableCell>
+                <TableHead className="w-[10%] whitespace-nowrap">نوع</TableHead>
 
-              <TableCell className="w-[10%]">
-                <Badge variant={t.type === 'هزینه' ? 'destructive' : 'default'}>
-                  {t.type === 'درامد' ? 'درآمد' : 'هزینه'}
-                </Badge>
-              </TableCell>
+                <TableHead className="w-[22%] whitespace-nowrap">
+                  مبلغ
+                </TableHead>
 
-              <TableCell className="w-[22%] mr-2">
-                {t.amount.toLocaleString('fa-IR')} تومان
-              </TableCell>
+                <TableHead className="w-[21.34%] whitespace-nowrap">
+                  عملیات ها
+                </TableHead>
+              </TableRow>
+            </TableHeader>
 
-              <TableCell className="w-[21.34%] ">
-                <Button
-                  render={<Link href={`/transactions/${t.id}`}>جزییات</Link>}
-                  nativeButton={false}
-                  variant={'outline'}
-                ></Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+            <TableBody>
+              {transactions.map((t) => (
+                <TableRow key={t.id}>
+                  <TableCell className="whitespace-nowrap">
+                    <Link href={`/transactions/${t.id}`}>
+                      {new Date(t.date).toLocaleDateString('fa-IR')}
+                    </Link>
+                  </TableCell>
+
+                  <TableCell className="whitespace-nowrap">
+                    <Link href={`/transactions/${t.id}`}>{t.title}</Link>
+                  </TableCell>
+
+                  <TableCell className="whitespace-nowrap">
+                    {categoryLabels[t.category]}
+                  </TableCell>
+
+                  <TableCell className="whitespace-nowrap">
+                    <Badge
+                      variant={t.type === 'هزینه' ? 'destructive' : 'default'}
+                    >
+                      {t.type === 'درامد' ? 'درآمد' : 'هزینه'}
+                    </Badge>
+                  </TableCell>
+
+                  <TableCell className="whitespace-nowrap">
+                    {t.amount.toLocaleString('fa-IR')} تومان
+                  </TableCell>
+
+                  <TableCell className="whitespace-nowrap">
+                    <Button
+                      render={
+                        <Link href={`/transactions/${t.id}`}>جزییات</Link>
+                      }
+                      nativeButton={false}
+                      variant="outline"
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
     </div>
   )
 }
