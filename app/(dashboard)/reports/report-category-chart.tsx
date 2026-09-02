@@ -12,6 +12,9 @@ import {
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
+const INCOME_COLOR = '#7DAE95' // سبز ملایم
+const EXPENSE_COLOR = '#D98C8C' // قرمز ملایم
+
 interface CategoryItem {
   category: string
   amount: number
@@ -24,6 +27,8 @@ interface ReportCategoryChartProps {
 }
 
 export function ReportCategoryChart({ data, type }: ReportCategoryChartProps) {
+  const barColor = type === 'هزینه' ? EXPENSE_COLOR : INCOME_COLOR
+
   return (
     <Card>
       <CardHeader>
@@ -83,11 +88,7 @@ export function ReportCategoryChart({ data, type }: ReportCategoryChartProps) {
                     }
                   />
 
-                  <Bar
-                    dataKey="amount"
-                    fill={type === 'هزینه' ? '#a3a3a3' : '#0a0a0a'}
-                    radius={[0, 4, 4, 0]}
-                  />
+                  <Bar dataKey="amount" fill={barColor} radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

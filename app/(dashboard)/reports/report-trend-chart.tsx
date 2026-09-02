@@ -12,6 +12,9 @@ import {
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
+const INCOME_COLOR = '#7DAE95' // سبز ملایم
+const EXPENSE_COLOR = '#D98C8C' // قرمز ملایم
+
 interface TrendItem {
   label: string | number
   income: number
@@ -54,14 +57,26 @@ function TrendTooltip({
       </p>
 
       <div className="space-y-1">
-        <div className="flex justify-between gap-5">
-          <span>درآمد</span>
+        <div className="flex items-center justify-between gap-5">
+          <span className="flex items-center gap-1.5">
+            <span
+              className="h-2 w-2 rounded-sm"
+              style={{ backgroundColor: INCOME_COLOR }}
+            />
+            درآمد
+          </span>
 
           <strong>{Number(income).toLocaleString('fa-IR')} تومان</strong>
         </div>
 
-        <div className="flex justify-between gap-5">
-          <span>هزینه</span>
+        <div className="flex items-center justify-between gap-5">
+          <span className="flex items-center gap-1.5">
+            <span
+              className="h-2 w-2 rounded-sm"
+              style={{ backgroundColor: EXPENSE_COLOR }}
+            />
+            هزینه
+          </span>
 
           <strong>{Number(expense).toLocaleString('fa-IR')} تومان</strong>
         </div>
@@ -113,9 +128,9 @@ export function ReportTrendChart({ data, granularity }: ReportTrendChartProps) {
               }}
             />
 
-            <Bar dataKey="income" fill="#0a0a0a" radius={[3, 3, 0, 0]} />
+            <Bar dataKey="income" fill={INCOME_COLOR} radius={[3, 3, 0, 0]} />
 
-            <Bar dataKey="expense" fill="#a3a3a3" radius={[3, 3, 0, 0]} />
+            <Bar dataKey="expense" fill={EXPENSE_COLOR} radius={[3, 3, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </CardContent>

@@ -12,6 +12,9 @@ import {
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
+const INCOME_COLOR = '#7DAE95' // سبز ملایم
+const EXPENSE_COLOR = '#D98C8C' // قرمز ملایم
+
 interface DayAmount {
   day: number
   amount: number
@@ -77,7 +80,10 @@ function OverviewTooltip({ active, payload, label }: OverviewTooltipProps) {
         {/* درآمد */}
         <p className="tabular-amount flex items-center justify-between gap-4">
           <span className="flex items-center gap-1.5">
-            <span className="h-2 w-2 rounded-sm bg-[#0a0a0a]" />
+            <span
+              className="h-2 w-2 rounded-sm"
+              style={{ backgroundColor: INCOME_COLOR }}
+            />
             درآمد
           </span>
 
@@ -89,7 +95,10 @@ function OverviewTooltip({ active, payload, label }: OverviewTooltipProps) {
         {/* هزینه */}
         <p className="tabular-amount flex items-center justify-between gap-4">
           <span className="flex items-center gap-1.5">
-            <span className="h-2 w-2 rounded-sm bg-[#a3a3a3]" />
+            <span
+              className="h-2 w-2 rounded-sm"
+              style={{ backgroundColor: EXPENSE_COLOR }}
+            />
             هزینه
           </span>
 
@@ -110,12 +119,18 @@ function OverviewLegend() {
   return (
     <div className="flex items-center gap-5 text-xs text-muted-foreground">
       <span className="flex items-center gap-1.5">
-        <span className="h-2.5 w-2.5 rounded-sm bg-[#0a0a0a]" />
+        <span
+          className="h-2.5 w-2.5 rounded-sm"
+          style={{ backgroundColor: INCOME_COLOR }}
+        />
         درآمد
       </span>
 
       <span className="flex items-center gap-1.5">
-        <span className="h-2.5 w-2.5 rounded-sm bg-[#a3a3a3]" />
+        <span
+          className="h-2.5 w-2.5 rounded-sm"
+          style={{ backgroundColor: EXPENSE_COLOR }}
+        />
         هزینه
       </span>
     </div>
@@ -200,9 +215,13 @@ export function DashboardCharts({
                 cursor={{ fill: '#00000006' }}
               />
 
-              <Bar dataKey="income" fill="#0a0a0a" radius={[3, 3, 0, 0]} />
+              <Bar dataKey="income" fill={INCOME_COLOR} radius={[3, 3, 0, 0]} />
 
-              <Bar dataKey="expense" fill="#a3a3a3" radius={[3, 3, 0, 0]} />
+              <Bar
+                dataKey="expense"
+                fill={EXPENSE_COLOR}
+                radius={[3, 3, 0, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -251,7 +270,7 @@ export function DashboardCharts({
                 cursor={{ fill: '#00000006' }}
               />
 
-              <Bar dataKey="amount" fill="#0a0a0a" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="amount" fill={INCOME_COLOR} radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -300,7 +319,11 @@ export function DashboardCharts({
                 cursor={{ fill: '#00000006' }}
               />
 
-              <Bar dataKey="amount" fill="#a3a3a3" radius={[4, 4, 0, 0]} />
+              <Bar
+                dataKey="amount"
+                fill={EXPENSE_COLOR}
+                radius={[4, 4, 0, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
