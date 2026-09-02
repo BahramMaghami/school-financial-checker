@@ -5,6 +5,8 @@ import { ReportSummary } from './report-summary'
 import { ReportTrendChart } from './report-trend-chart'
 import { ReportCategoryChart } from './report-category-chart'
 import { ReportTransactionsTable } from './report-transactions-table'
+import DateObject from 'react-date-object'
+import persian from 'react-date-object/calendars/persian'
 
 import {
   calculateSummary,
@@ -23,21 +25,52 @@ interface ReportsPageProps {
 }
 
 function getCurrentMonthRange() {
-  const now = new Date()
+  const today = new DateObject({
+    date: new Date(),
+    calendar: persian,
+  })
 
-  const start = new Date(now.getFullYear(), now.getMonth(), 1)
+  const startOfMonth = new DateObject({
+    date: today.toDate(),
+    calendar: persian,
+  })
 
-  const end = new Date(now.getFullYear(), now.getMonth() + 1, 1)
+  startOfMonth.set({
+    day: 1,
+  })
 
-  return { start, end }
+  return {
+    start: startOfMonth.toDate(),
+    end: today.toDate(),
+  }
 }
 
 function getMonthRange(date: Date) {
-  const start = new Date(date.getFullYear(), date.getMonth(), 1)
+  const selectedDate = new DateObject({
+    date,
+    calendar: persian,
+  })
 
-  const end = new Date(date.getFullYear(), date.getMonth() + 1, 1)
+  const startOfMonth = new DateObject({
+    date: selectedDate.toDate(),
+    calendar: persian,
+  })
 
-  return { start, end }
+  startOfMonth.set({
+    day: 1,
+  })
+
+  const nextMonth = new DateObject({
+    date: startOfMonth.toDate(),
+    calendar: persian,
+  })
+
+  nextMonth.add(1, 'month')
+
+  return {
+    start: startOfMonth.toDate(),
+    end: nextMonth.toDate(),
+  }
 }
 
 export default async function ReportsPage({ searchParams }: ReportsPageProps) {
