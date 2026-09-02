@@ -32,6 +32,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import DatePicker from 'react-multi-date-picker'
 import persian from 'react-date-object/calendars/persian'
 import persian_fa from 'react-date-object/locales/persian_fa'
+import { InvoiceUploader } from '@/components/shared/invoice-uplaoder'
 
 const categories = [
   { value: 'حقوق', label: 'حقوق' },
@@ -65,6 +66,7 @@ export function TransactionForm({
       amount: 0,
       category: 'سایر',
       description: '',
+      invoiceUrl: null,
       ...defaultValues,
     },
   })
@@ -205,6 +207,23 @@ export function TransactionForm({
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel>توضیحات (اختیاری)</FieldLabel>
                   <Textarea {...field} value={field.value ?? ''} />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+
+            <Controller
+              control={form.control}
+              name="invoiceUrl"
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel>عکس فاکتور (اختیاری)</FieldLabel>
+                  <InvoiceUploader
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}

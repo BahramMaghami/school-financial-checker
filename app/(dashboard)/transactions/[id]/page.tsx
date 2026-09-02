@@ -8,13 +8,13 @@ import { DeleteTransactionButton } from '@/app/(dashboard)/transactions/[id]/del
 import { auth } from '@/lib/auth'
 
 const categoryLabels: Record<string, string> = {
-  SALARY: 'حقوق',
-  MAINTENANCE: 'تعمیرات',
-  EQUIPMENT: 'تجهیزات',
-  TUITION: 'شهریه',
-  UTILITIES: 'قبوض',
-  SUPPLIES: 'ملزومات',
-  OTHER: 'سایر',
+  حقوق: 'حقوق',
+  تعمیرات: 'تعمیرات',
+  تجهیزات: 'تجهیزات',
+  شهریه: 'شهریه',
+  قبوض: 'قبوض',
+  ملزومات: 'ملزومات',
+  سایر: 'سایر',
 }
 
 export default async function TransactionDetailPage({
